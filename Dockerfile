@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN echo 'deb http://linux.dropbox.com/debian buster main' > /etc/apt/sources.list.d/dropbox.list \
 	&& apt-get -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true -qqy update \
 	# Note 'ca-certificates' dependency is required for 'dropbox start -i' to succeed
-	&& apt-get -o APT::Get::AllowUnauthenticated=true -qqy install ca-certificates curl python-gpgme dropbox libatomic1 \
+	&& apt-get -o APT::Get::AllowUnauthenticated=true -qqy install ca-certificates curl python-gpg dropbox libatomic1 \
 	# Perform image clean up.
 	&& apt-get -qqy autoclean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
