@@ -3,10 +3,10 @@ MAINTAINER Leonardo Robol <leo@robol.it>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Following 'How do I add or remove Dropbox from my Linux repository?' - https://www.dropbox.com/en/help/246
-RUN echo 'deb http://linux.dropbox.com/debian jessie main' > /etc/apt/sources.list.d/dropbox.list \
-	&& apt-get --allow-unauthenticated -qqy update \
+RUN echo 'deb http://linux.dropbox.com/debian buster main' > /etc/apt/sources.list.d/dropbox.list \
+	&& apt-get -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true -qqy update \
 	# Note 'ca-certificates' dependency is required for 'dropbox start -i' to succeed
-	&& apt-get --allow-unauthenticated -qqy install ca-certificates curl python-gpgme dropbox libatomic1 \
+	&& apt-get -o APT::Get::AllowUnauthenticated=true -qqy install ca-certificates curl python-gpgme dropbox libatomic1 \
 	# Perform image clean up.
 	&& apt-get -qqy autoclean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
